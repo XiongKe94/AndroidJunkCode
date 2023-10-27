@@ -111,6 +111,22 @@ class JunkUtil {
     }
 
     /**
+     * 生成随机字符串
+     * @return
+     */
+    static String generateUUId() {
+        return UUID.randomUUID().toString()
+    }
+
+    /**
+     * 生成随机Int
+     * @return
+     */
+    static int generateInt(int bound){
+        return random.nextInt(bound)
+    }
+
+    /**
      * 生成Activity
      * @param javaDir
      * @param packageName
@@ -235,7 +251,7 @@ class JunkUtil {
             config.layoutGenerator.execute(contentBuilder)
             writeStringToFile(layoutFile, contentBuilder.toString())
         } else {
-            def layoutStr = String.format(ResTemplate.LAYOUT_TEMPLATE, generateId())
+            def layoutStr = ResTemplate.getLayoutTemp()
             writeStringToFile(layoutFile, layoutStr)
         }
     }
@@ -267,7 +283,7 @@ class JunkUtil {
         } else {
             for (int i = 0; i < config.drawableCount; i++) {
                 def drawableName = "${config.resPrefix.toLowerCase()}${generateName(i)}"
-                writeStringToFile(new File(resDir, "drawable/${drawableName}.xml"), String.format(ResTemplate.DRAWABLE, generateColor()))
+                writeStringToFile(new File(resDir, "drawable/${drawableName}.xml"), ResTemplate.getDrawableTemp())
             }
         }
     }
